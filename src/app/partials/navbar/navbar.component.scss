@@ -1,89 +1,211 @@
-.wrapper {
-  width: 100%;
-  background-color: #d21c43; /* Fondo rojo */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.navbar {
+.wrapper .navbar {
+  background-color: #d9534f;
+  color: #ffffff;
+  padding: 10px 20px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
-.navbar-logo .app-title {
-  font-size: 28px;
+.wrapper .navbar .navbar-logo {
+  font-size: 1.5rem;
   font-weight: bold;
-  color: white;
+  color: #ffffff;
 }
 
-.filter-buttons {
+.wrapper .navbar .search-bar {
+  flex-grow: 1;
   display: flex;
-  flex-wrap: wrap; /* Permite que los botones se ajusten a la pantalla */
-  gap: 10px;
-  margin-top: 10px;
-  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
 }
 
-.filter-button {
-  background-color: white;
-  color: #d21c43;
-  border: none; /* Elimina el borde */
-  border-radius: 20px; /* Bordes redondeados */
+.wrapper .navbar .search-bar input[type="text"] {
+  width: 100%;
+  max-width: 400px;
   padding: 8px 15px;
+  border-radius: 20px;
+  border: none;
+  font-size: 1rem;
+}
+
+.wrapper .navbar .filter-buttons {
+  display: flex;
+  gap: 1cm; /* Separación de 1 cm entre el botón de filtros y el ícono de usuario */
+  flex-wrap: wrap;
+}
+
+.wrapper .navbar .filter-buttons .filter-button {
+  font-size: 0.9rem;
+  padding: 8px 15px;
+  border-radius: 20px;
+  background-color: #ffffff;
+  color: #d9534f;
+  border: none;
   cursor: pointer;
-  font-size: 14px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s, color 0.3s, transform 0.3s;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
 }
 
-.filter-button:hover {
-  background-color: #f2f2f2;
+.wrapper .navbar .filter-buttons .filter-button i {
+  margin-right: 5px;
 }
 
-.separator {
-  margin: 0 15px;
-  color: white;
+.wrapper .navbar .filter-buttons .filter-button:hover {
+  background-color: #c9302c;
+  color: #ffffff;
+  transform: scale(1.05);
 }
 
+/* Menú de usuario y Dropdown */
 .user-menu {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .user-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  font-size: 1.5rem;
+  color: #ffffff;
   cursor: pointer;
-  background-color: white;
-  padding: 5px;
+  margin-left: 1cm; /* Separación de 1 cm entre el botón de filtros y el ícono de usuario */
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #ffffff;
+  color: #d9534f;
+  border: 1px solid #dddddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: none;
+  flex-direction: column;
+  min-width: 150px;
+  z-index: 1000;
+}
+
+.user-menu:hover .dropdown-menu,
+.user-icon:focus + .dropdown-menu {
   display: flex;
-  justify-content: center;
+}
+
+.dropdown-item {
+  padding: 10px 15px;
+  color: #d9534f;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
   align-items: center;
 }
 
-/* Media Queries para pantallas pequeñas */
-@media (max-width: 768px) {
-  .navbar-logo .app-title {
-    font-size: 22px; /* Ajusta el tamaño del título en pantallas pequeñas */
-  }
+.dropdown-item i {
+  margin-right: 5px;
+}
 
-  .filter-buttons {
-    flex-direction: column;
-    margin-top: 15px;
-  }
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
 
-  .filter-button {
-    width: 100%;
-    margin-right: 0;
-  }
+/* Modal de Configuración de Filtros */
+.filter-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .user-menu {
-    margin-left: 0;
-  }
+.filter-modal .modal-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  position: relative;
+}
 
-  .dropdown-menu {
-    width: 100%;
-    top: 40px;
-  }
+.filter-modal .modal-content h3 {
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+  color: #d9534f;
+}
+
+.filter-modal .modal-content label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: left;
+  color: #333333;
+}
+
+.filter-modal .modal-content input[type="range"],
+.filter-modal .modal-content select {
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.filter-modal .modal-content .modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-modal .modal-content .btn {
+  margin: 10px 5px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-weight: bold;
+}
+
+.filter-modal .modal-content .btn-primary {
+  background-color: #d9534f;
+  color: #ffffff;
+  border: none;
+}
+
+.filter-modal .modal-content .btn-primary:hover {
+  background-color: #c9302c;
+}
+
+.filter-modal .modal-content .btn-danger {
+  background-color: #dc3545;
+  color: #ffffff;
+  border: none;
+}
+
+.filter-modal .modal-content .btn-danger:hover {
+  background-color: #c82333;
+}
+
+.filter-modal .modal-content .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: #d9534f;
+  cursor: pointer;
+}
+
+.filter-modal .modal-content .close-btn:hover {
+  color: #c9302c;
 }
