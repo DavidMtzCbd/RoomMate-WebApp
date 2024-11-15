@@ -1,6 +1,40 @@
-<app-navbar></app-navbar>
+
 
 <div class="content">
 <h2>Bienvenido, Propietario</h2>
 <p>Administra tus propiedades desde aquí. Usa la barra de navegación para acceder a diferentes opciones.</p>
 </div>
+  <div class="propiedades-lista">
+    <h3>Propiedades Registradas</h3>
+
+    <div *ngFor="let propiedad of lista_propiedades" class="propiedad-card">
+      <p><strong>Direccion:</strong> {{ propiedad.direccion }}</p>
+      <p><strong>Habitaciones:</strong> {{ propiedad.habitaciones }}</p>
+      <p><strong>Capacidad:</strong> {{ propiedad.capacidad }}</p>
+      <p><strong>Precio:</strong> ${{ propiedad.precio }}</p>
+      <p><strong>Estado:</strong> {{ propiedad.estados }}</p>
+      <p><strong>Estado Sanitarios:</strong> {{ propiedad.sanitarios }}</p>
+      <p><strong>Teléfono:</strong> {{ propiedad.telefono }}</p>
+
+      <p><strong>Servicios:</strong> {{ propiedad.servicios_json }}</p>
+
+       <!-- Mostrar las imágenes cargadas -->
+    <div *ngIf="propiedad.imagenes && propiedad.imagenes.length > 0">
+      <p><strong>Imágenes:</strong></p>
+      <div *ngFor="let img of propiedad.imagenes; let i = index" class="image-container">
+        <img [src]="img" alt="Imagen {{i+1}}" width="100">
+      </div>
+    </div>
+
+    <div class="image-preview" *ngIf="propiedad.imagenes.length > 0">
+      <div *ngFor="let img of propiedad.imagenes; let i = index" class="image-container">
+        <img [src]="img" alt="Imagen {{i+1}}" width="100">
+
+          <mat-icon>close</mat-icon>
+
+      </div>
+    </div>
+
+    </div>
+  </div>
+

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { ValidatorService } from './tools/validator.service';
 import { ErrorService } from './tools/error.service';
 import { FacadeService } from './facade.service';
-import { first, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 const httpOptions = {
@@ -28,16 +28,17 @@ export class PropiedadService {
       'habitaciones': '',
       'capacidad': '',
       'precio': '',
-      'servicios_json ':[],
+      'servicios_json': [],
       'sanitarios': '',
       'telefono': '',
       'estados': '',
+      'imagenes': [] ,
     }
   }
 
   // Validación del formulario
   public validarPropiedad(data: any, editar: boolean){
-    console.log("validando usuario...", data);
+    console.log("validando propiedad...", data);
     let error: any = [];
 
     if (!this.validatorService.required(data["direccion"])) {
@@ -51,12 +52,10 @@ export class PropiedadService {
       error["habitaciones"] = this.errorService.numeric;
     }
 
-
     if (!this.validatorService.required(data["capacidad"])) {
       error["capacidad"] = this.errorService.required;
     }
 
-    if (!editar) {
       if (!this.validatorService.required(data["precio"])) {
         error["precio"] = this.errorService.required;
       }
@@ -65,22 +64,13 @@ export class PropiedadService {
         error["precio"] = this.errorService.numeric;
       }
 
-      if (!this.validatorService.required(data["servicios_json"])) {
-        error["servicios_json"] = this.errorService.required;
-      }
       if(data["servicios_json"].length == 0){
         error["servicios_json"] = "Al menos debes elegir una materia";
-        //alert("Debes seleccionar materias para poder registrarte.");
+        alert("Debes seleccionar al menos un servicio para poder registrarte.");
       }
-      //Return arreglo
-      return error;
-    }
 
     if (!this.validatorService.required(data["sanitarios"])) {
       error["sanitarios"] = this.errorService.required;
-    }else if(!this.validatorService.numeric(data["sanitarios"])){
-      alert("El formato es solo números");
-      error["sanitarios"] = this.errorService.numeric;
     }
 
     if(!this.validatorService.required(data["telefono"])){
@@ -100,9 +90,25 @@ export class PropiedadService {
   //                    Cambiardirecciones del back
   // SERVICIOS HTTP
   // Servicio para registrar propiedad
-  public registrarPropiedad(data: any): Observable<any> {
-    return this.http.post<any>(`${environment.url_api}/propiedad/`, data, httpOptions);
+  public registrarPropiedad(data: any, images: File[]): Observable <any>{
+    const formData: FormData = new FormData();
+
+  // Añadir datos de la propiedad al FormData
+  for (const key in data) {
+    if (data.hasOwnProperty(key)) {
+      formData.append(key, data[key]);
+    }
   }
+
+  // Añadir imágenes al FormData
+  images.forEach((image) => {
+    formData.append('imagenes', image); // 'imagenes' debe coincidir con el nombre del campo en el backend
+  });
+
+  // Cambiar el encabezado para que no se envíe Content-Type
+  return this.http.post<any>(`${environment.url_api}/propiedades/`, formData);
+}
+
 
   public obtenerListaPropiedades (): Observable <any>{
     var token = this.facadeService.getSessionToken();

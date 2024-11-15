@@ -4,92 +4,127 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #fff; /* Fondo blanco por defecto */
-  background: url('/assets/images/login.png') no-repeat center center; /* Aplica la imagen de fondo directamente */
-  background-size: cover; /* Asegura que la imagen cubra todo el fondo */
+  background-color: #fff;
+  background: url('/assets/images/login.png') no-repeat center center;
+  background-size: cover;
+}
 
-  .wrapper {
-    max-width: 400px;
+.wrapper {
+  max-width: 400px;
+  width: 100%;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  z-index: 1;
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 26px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.icon {
+  text-align: center;
+  font-size: 60px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.container-inputs {
+  .form-control {
     width: 100%;
-    padding: 30px;
-    background-color: white;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    z-index: 1;
-  }
-
-  .title {
-    text-align: center;
-    font-weight: bold;
-    font-size: 26px;
-    color: #333;
-    margin-bottom: 15px;
-  }
-
-  .icon {
-    text-align: center;
-    font-size: 60px;
-    color: #333;
+    padding: 12px 15px;
     margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
   }
 
-  .container-inputs {
-    .form-control {
-      width: 100%;
-      padding: 12px 15px;
-      margin-bottom: 20px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 16px;
-    }
+  /* Estilos específicos para el campo de contraseña con ícono */
+  .input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
 
-    .input-group-append .input-group-text {
-      background-color: transparent;
-      border-left: none;
-      cursor: pointer;
-    }
+  .input-group .form-control.pwd {
+    padding-right: 2.5rem; /* Espacio para el ícono del ojo */
+    border-radius: 8px;
+  }
 
-    .btn-primary {
-      width: 100%;
-      padding: 15px;
-      font-size: 18px;
-      font-weight: bold;
-      background-color: #000;
-      color: #fff;
-      border-radius: 8px;
-    }
+  /* Estilos para el ícono del ojo */
+  .input-group .input-group-text {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    height: auto;
+  }
 
-    .invalid-feedback {
-      color: red;
-    }
+  /* Estilo para el botón de inicio de sesión */
+  .btn-primary {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #000;
+    color: #fff;
+    border-radius: 8px;
+    border: none;
+  }
 
-    .register {
-      color: #000;
-      font-weight: bold;
-      text-decoration: underline;
-      cursor: pointer;
-    }
+  .btn-primary:hover {
+    background-color: #333;
+  }
 
-    label {
-      font-size: 14px;
-    }
+  .invalid-feedback {
+    color: red;
+    font-size: 14px;
+  }
+
+  .register {
+    color: #000;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  label {
+    font-size: 14px;
+    color: #007bff;
+    cursor: pointer;
+  }
+
+  label:hover {
+    text-decoration: underline;
   }
 }
 
 /* Responsivo para pantallas pequeñas */
 @media only screen and (max-width: 600px) {
-  .login {
-    .wrapper {
-      max-width: 95%;
-      padding: 20px;
-    }
+  .login .wrapper {
+    max-width: 95%;
+    padding: 20px;
+  }
 
-    .container-inputs .form-control {
-      font-size: 14px;
-    }
+  .container-inputs .form-control {
+    font-size: 14px;
+  }
 
-    .container-inputs .btn-primary {
-      font-size: 16px;
-    }
+  .container-inputs .btn-primary {
+    font-size: 16px;
   }
 }
